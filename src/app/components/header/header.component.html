@@ -1,0 +1,20 @@
+<header>
+  <div class="navbar navbar-dark bg-success shadow-sm">
+    <div class="navbar-brand align-item-center d-flex">
+      <i style="font-size: 20px; cursor: pointer; margin-left: 10px;" class="fas fa-shipping-fast" routerLink="/">
+        K-stores
+      </i>
+      <div class="form-group">
+        <input type="text"  class="form-control" placeholder="Search products" />
+      </div>
+      <span class="fas fa-search search-icon"></span>
+    </div>
+    <div>
+      <button routerLink="cart" class="btn btn-success">
+        <i style="font-size: 80px;" class="fas fa-cart-plus" style="color:whitesmoke">
+        </i>
+        <div class="badge bg-danger">{{totalItem}}</div>
+      </button>
+    </div>
+  </div>
+</header>

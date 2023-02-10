@@ -1,0 +1,19 @@
+<div class="loader" *ngIf="products.length === 0">
+<h1>Loading...</h1>
+</div>
+<div class="container" style="display: flex;" >
+  <div class="row">
+    <ng-container  *ngFor="let product of products" style="margin:0 5px;">
+    <div class="card col-md-3" style="cursor: pointer">
+      <img src={{product.image}} alt="Product image" width="200px" />
+      <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100ch;">{{product.title}}</h5>
+      <p>N{{product.price}}</p>
+      <p>{{product.category}}</p>
+      <p>{{product.description}}</p>
+      <button class="btn btn-success" (click)="addToCart(product)">Add to cart</button>
+    </div>
+  </ng-container>
+
+  </div>
+</div>
+<!-- [routerLink]="['/product', product.id]" -->
