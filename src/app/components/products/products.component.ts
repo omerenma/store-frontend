@@ -4,14 +4,7 @@ import { Observable } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { CartService } from 'src/app/service/cart.service';
 import {ProductsService} from '../../service/products.service'
-export interface Products  {
-  id:number;
-  title:string;
-  price:number;
-  category:string;
-  description:string;
-  image:string
-}
+import {Products} from '../../models/Models'
 
 @Component({
   selector: 'app-products',

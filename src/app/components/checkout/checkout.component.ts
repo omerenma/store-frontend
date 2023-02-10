@@ -1,15 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import {  ActivatedRoute, ParamMap } from '@angular/router';
+import {CheckoutProduct} from '../../models/Models'
 
 interface OnInit {
   ngOnInit(): void
 }
-interface Product {
-  image:string;
-  price:number;
-  title:string;
-  amount?:number;
-}
+
 @Component({
   selector: 'app-cart',
   templateUrl: './checkout.component.html',
@@ -24,7 +20,7 @@ export class CheckoutComponent implements OnInit {
   @Input() product = {}
 
   title:string = 'Cart'
-  productOrder:Product[] = []
+  productOrder:CheckoutComponent[] = []
 
   id:string = ''
   fullname:string = ''
