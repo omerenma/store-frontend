@@ -1,8 +1,20 @@
 <div class="loader" *ngIf="products.length === 0">
 <h1>Loading...</h1>
 </div>
+<div
+*ngIf="addItemInfo"
+class="container"
+style="width: 300px; background-color: orange;
+display: flex; justify-content:
+center;
+align-items: center;"
+>
+<p style="color:white">{{addItemInfo}}</p>
+<span style="cursor: pointer; font-weight: bold; position: relative; bottom: 15px; left: 30px;" (click)="removeEl()">x</span>
+</div>
 <div class="container" style="display: flex;">
-  <div class="row" routerLink="cart" >
+  <div class="row" >
+    <button *ngIf="products" style="align-self: center; justify-self: center; border: none; background: transparent; color: brown;" routerLink="cart">Go to cart</button>
     <ng-container  *ngFor="let product of products" style="margin:0 5px;">
     <div class="card col-md-3" style="cursor: pointer;">
       <img src={{product.image}} alt="Product image" width="200px" />
@@ -17,3 +29,4 @@
   </div>
 </div>
 <!-- [routerLink]="['/product', product.id]" -->
+<!-- routerLink="cart" -->

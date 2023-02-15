@@ -1,4 +1,15 @@
 
+<div
+*ngIf="removeItemMessage"
+class="container"
+style="width: 300px; background-color: orange;
+display: flex; justify-content:
+center;
+align-items: center;"
+>
+<p style="color:white">{{removeItemMessage}}</p>
+<span style="cursor: pointer; font-weight: bold; position: relative; bottom: 15px; left: 30px;" (click)="removeEl()">x</span>
+</div>
 <ng-container *ngIf="products.length != 0">
   <div class="container">
 

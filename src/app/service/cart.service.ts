@@ -8,6 +8,8 @@ export class CartService {
 public cartItemList: any = []
 public productList = new BehaviorSubject<any>([])
 
+public removeItemMessage:string = ''
+public addItemMessage:string = ''
   constructor() { }
   getProducts(){
     return this.productList.asObservable()
@@ -18,6 +20,7 @@ public productList = new BehaviorSubject<any>([])
   }
   addToCart(product:any){
     this.cartItemList.push(product)
+    this.addItemMessage = 'Item successfully added'
     this.productList.next(this.cartItemList)
     this.getTotalPrice()
   }
@@ -32,6 +35,7 @@ public productList = new BehaviorSubject<any>([])
     this.cartItemList.map((a:any, index:any) => {
       if(product.id === a.id){
         this.cartItemList.splice(index, 1)
+        this.removeItemMessage = 'Item successfully removed'
       }
     })
     this.productList.next(this.cartItemList)

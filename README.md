@@ -1,6 +1,9 @@
 # StoreFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
+## Description
+
+  Store front is an e-commerce front-end application built with angular.
+  Custormers can shop for different items, add item to cart, reomve ordered item and checkout to payment
 
 ## Development server
 

@@ -2,18 +2,69 @@
 <div>
   <h5 style="text-align: center; position: relative; top:70px;">Complete your order</h5>
 
-  <div class="container">
-      <form class="form-group">
+  <div class="container" >
+      <form #form="ngForm" class="form-group" (ngSubmit)="formSubmit()">
         <div><label for="fullname">Full name</label></div>
-        <input class="input-group" type="text" name="fullname" placeholder="Enter fullname" style="width: 300px;"/>
+        <input
+        class="input-group"
+        type="text"
+        required
+        minlength="6"
+        name="fullname"
+        placeholder="Enter fullname"
+        style="width: 300px;"
+        [(ngModel)]="model.fullname"
+        #name="ngModel"
+
+
+        />
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          Name is required
+        </div>
         <div><label for="address">Address</label></div>
-        <textarea style="width: 300px;" class="input-group" type="text" name="address" placeholder="Enter billiing address"></textarea>
+        <textarea
+         style="width: 300px;"
+         class="input-group"
+         type="text"
+         name="address"
+         required
+         placeholder="Enter billiing address"
+         [(ngModel)]="model.address"
+         #name="ngModel"
+         >
+        </textarea>
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          Address is required
+        </div>
         <div><label for="carn number">Credit card number</label></div>
-        <div><input style="width: 300px;" class="input-group" type="text" name="creditcardnumber" placeholder="Enter Credit card number"/></div>
-        <input type="submit" class="btn btn-success" style="width:300px; margin: 10px 0;" value="Submit"/>
+        <div><input
+          style="width: 300px;"
+          class="input-group"
+          type="text"
+          name="creditcardnumber"
+          required
+          placeholder="Enter Credit card number"
+          [(ngModel)]="model.cardNumber"
+          #name="ngModel"
+          />
+        </div>
+
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          Please provide credit card details
+        </div>
+       <button
+       style="width:300px;
+       margin-top: 10px;"
+        class="btn btn-primary"
+        [disabled]="!form.form.valid"
+        routerLink="/confirmation"
+        >Submit</button>
       </form>
+
+
     </div>
 </div>
 
 
-<!-- (ngSubmit)="formSubmit()" -->
+
+

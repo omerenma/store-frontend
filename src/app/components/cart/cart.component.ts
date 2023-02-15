@@ -9,7 +9,13 @@ import { CartService } from 'src/app/service/cart.service';
 export class CartComponent implements OnInit {
 public products:any = []
 public grandTotal!:number
-constructor(private cartService:CartService){}
+public removeItemMessage = ''
+constructor(private cartService:CartService){
+
+}
+removeEl():void{
+  this.removeItemMessage = ''
+}
 ngOnInit(): void {
     this.cartService.getProducts().subscribe(res => {
       this.products = res;
@@ -18,6 +24,7 @@ ngOnInit(): void {
 }
 removeItem(item: any){
 this.cartService.removeCartItem(item)
+this.removeItemMessage = this.cartService.removeItemMessage
 }
 emptyCart(){
   this.cartService.removeAllCart()
