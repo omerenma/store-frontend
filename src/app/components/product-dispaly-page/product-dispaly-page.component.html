@@ -1,0 +1,14 @@
+
+<h2 style="text-align: center;">{{title}}</h2>
+<div class="container d-flex p-2 w-fluid justify-content-around align-items-center" >
+  <div class="w-25">
+    <img src={{products.image}} alt="item image" class="mw-100">
+  </div>
+  <div class="w-50">
+    <h5 class="">{{products.title}}</h5>
+    <!-- <p>{{products.id}}</p> -->
+    <p>N{{products.price}}</p>
+    <p>{{products.description}}</p>
+    <button type="submit" class="btn btn-success w-100" (click)="addToCart(products)">Add to cart</button>
+  </div>
+</div>

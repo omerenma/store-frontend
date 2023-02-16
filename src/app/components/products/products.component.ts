@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { CartService } from 'src/app/service/cart.service';
 import {ProductsService} from '../../service/products.service'
 import {Products} from '../../models/Models'
@@ -11,13 +11,14 @@ import {Products} from '../../models/Models'
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   title:string =  'Products Page'
   products:Products[] = []
  addItemInfo = ''
 
   constructor(private productsData:ProductsService,  private route: ActivatedRoute, private cartService:CartService){
-    const id: Observable<string> = route.params.pipe(map(p => p['id']))  }
+    const id: Observable<string> = route.params.pipe(map(p => p['id']))
+  }
 
       removeEl():void{
         this.addItemInfo = ''

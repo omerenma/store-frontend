@@ -16,17 +16,22 @@ align-items: center;"
   <div class="row" >
     <button *ngIf="products" style="align-self: center; justify-self: center; border: none; background: transparent; color: brown;" routerLink="cart">Go to cart</button>
     <ng-container  *ngFor="let product of products" style="margin:0 5px;">
-    <div class="card col-md-3" style="cursor: pointer;">
-      <img src={{product.image}} alt="Product image" width="200px" />
+    <div class="card col-md-3" >
+      <img
+      src={{product.image}}
+      alt="Product image" width="200px"
+      title="Click to view product detail"
+       [routerLink]="['/pdp', product.id]"
+       style="cursor:pointer"
+       />
       <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100ch;">{{product.title}}</h5>
       <p>N{{product.price}}</p>
       <p>{{product.category}}</p>
-      <p>{{product.description}}</p>
-      <button type="button" class="btn btn-success" style="position: absolute; bottom: 3px; width: 300px;" (click)="addToCart(product)">Add to cart</button>
+      <!-- <p>{{product.description}}</p> -->
+      <button type="button" class="btn btn-success" (click)="addToCart(product)">Add to cart</button>
     </div>
   </ng-container>
 
   </div>
 </div>
-<!-- [routerLink]="['/product', product.id]" -->
-<!-- routerLink="cart" -->
+
