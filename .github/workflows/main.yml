@@ -1,45 +1,32 @@
-name: deploy angular app to AWS
+name: Deploy angular app
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+    - master
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
+    - uses: actions/checkout@master
+    - uses: jakejarvis/s3-sync-action@master
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-        check-latest: true
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.4.1
 
-    - name: Build
+    - name: Npm install & npm build
       run: |
-        npm install
-        npm run build
+          npm install
+          npm run build
+
+    - name: S3 Sync
+      uses: jakejarvis/s3-sync-action@v0.5.1
+      with:
+        args: --acl public-read --follow-symlinks --delete
       env:
-          PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN}}    
-    - name: ACTIONS_ALLOW_UNSECURE_COMMANDS
-      run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
-        
-    - uses: chrislennon/action-aws-cli@v1.1
-    - run: aws s3 sync dist s3://${{ secrets.AWS_S3_BUCKET_NAME }}/container/latest
-      env:
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-    
-    - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/container/lates/index.html"
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'us-west-1'   # optional: defaults to us-east-1
+        SOURCE_DIR: 'dist/ng-fundamentals'      # optional: defaults to entire repository
